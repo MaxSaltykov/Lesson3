@@ -9,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class BasePage {
 
-    String login = "grushil";
+    String login = "maxSaltykov";
     String password = "123qaz!@#QAZ";
 
     @BeforeAll

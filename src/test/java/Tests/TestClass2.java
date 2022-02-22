@@ -8,6 +8,7 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
 import java.util.Random;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -55,7 +56,7 @@ public class TestClass2 extends BasePage {
         /**
          * Назначил себя на эту задачу
          */
-        $x("//span[@class='assign-to-me-link']").click();
+        $x("//span[@class='assign-to-me-link']").shouldBe(Condition.visible).click();
 
         /**
          * Перевожу задачу в статус "выполнено"
@@ -68,7 +69,7 @@ public class TestClass2 extends BasePage {
          * проверим цвет плашки "готово"
          */
         sleep(1000); //там в CSS прописана трансформация цвета, она занимает время, поэтому надо подождать
-        Assertions.assertEquals("rgba(20, 137, 44, 1)", $x("//span[@id='status-val']/span").shouldBe().getCssValue("background-color"));
+        Assertions.assertEquals("rgba(20, 137, 44, 1)", $x("//span[@id='status-val']/span").getCssValue("background-color"));
     }
 
 }
