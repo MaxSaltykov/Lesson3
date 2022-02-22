@@ -26,34 +26,31 @@ public class TestClass2 extends BasePage {
         Selenide.open("https://edujira.ifellow.ru/secure/Dashboard.jspa", MainPage.class)
                 .isOpened();
 
-        String taskName = "NightTask";
-        //Random rand = new Random();
-        //int randomNumber = rand.nextInt();
-        // + " " + randomNumber
+        Random rand = new Random();
+        int int_random = rand.nextInt();
+        String taskName = "NightTask"+ " " + int_random;
+
+
         /**
          * Создаю задачу
          */
         $x("//a[@id='create_link']").click();
-        $x("//input[@id='summary']").sendKeys("NightTask");
+        $x("//input[@id='summary']").sendKeys(taskName);
         $x("//input[@id='create-issue-submit']").click();
         $x("//a[@id='find_link']").click();
         $x("//a[@id='jira.top.navigation.bar:issues_drop_current_lnk']").click();
 
         /**
-         * Выцепляю номер, который был присвоен моей задаче для последующей проверки
-         */
-        String taskNumber = $x("//li[@title='NightTask']").text();
-        taskNumber = taskNumber.substring(0, taskNumber.indexOf(taskName)).trim();
-
-        /**
          * Перехожу на страницу свежесозданной задачи
          */
-        open($x("//li[@title='NightTask']/a[1]").getAttribute("href"));
+        $x("//input[@id='searcher-query']").shouldBe(Condition.visible).setValue(taskName);
+        $x("//button[@original-title='Поиск задач']").click();
+
 
         /**
          * Проверяю что перешёл на страницу той задачи, что нужно
          */
-        Assertions.assertEquals(taskNumber, $x("//a[@class='issue-link']").getText());
+        //Assertions.assertEquals(taskNumber, $x("//a[@class='issue-link']").getText());
 
         /**
          * Назначил себя на эту задачу
@@ -63,7 +60,7 @@ public class TestClass2 extends BasePage {
         /**
          * Перевожу задачу в статус "выполнено"
          */
-        $x("//span[contains(text(),'Бизнес-процесс')]").shouldBe(Condition.visible).click();
+        $x("//span[contains(text(),'Бизнес-процесс')]").shouldBe(Condition.exist).click();
         $x("//span[contains(text(),'Выполнено')]").click();
 
         /**
