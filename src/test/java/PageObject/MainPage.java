@@ -6,7 +6,7 @@ import org.openqa.selenium.support.How;
 
 import static com.codeborne.selenide.Selenide.page;
 
-public class MainPage {
+public class MainPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//h1[text()='System Dashboard']")
     private SelenideElement header;

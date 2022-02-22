@@ -1,14 +1,18 @@
 package Tests;
 
 import PageObject.AuthorisationPage;
+import PageObject.BasePage;
 import PageObject.MainPage;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Random;
+
 import static com.codeborne.selenide.Selenide.*;
 
-public class TestClass2 {
+public class TestClass2 extends BasePage {
 
     @Test
     public void newTask() {
@@ -23,7 +27,9 @@ public class TestClass2 {
                 .isOpened();
 
         String taskName = "NightTask";
-
+        //Random rand = new Random();
+        //int randomNumber = rand.nextInt();
+        // + " " + randomNumber
         /**
          * Создаю задачу
          */
@@ -37,7 +43,7 @@ public class TestClass2 {
          * Выцепляю номер, который был присвоен моей задаче для последующей проверки
          */
         String taskNumber = $x("//li[@title='NightTask']").text();
-        taskNumber = taskNumber.substring(0, taskNumber.indexOf("NightTask")).trim();
+        taskNumber = taskNumber.substring(0, taskNumber.indexOf(taskName)).trim();
 
         /**
          * Перехожу на страницу свежесозданной задачи
@@ -57,7 +63,7 @@ public class TestClass2 {
         /**
          * Перевожу задачу в статус "выполнено"
          */
-        $x("//span[contains(text(),'Бизнес-процесс')]").click();
+        $x("//span[contains(text(),'Бизнес-процесс')]").shouldBe(Condition.visible).click();
         $x("//span[contains(text(),'Выполнено')]").click();
 
         /**
@@ -65,7 +71,7 @@ public class TestClass2 {
          * проверим цвет плашки "готово"
          */
         sleep(1000); //там в CSS прописана трансформация цвета, она занимает время, поэтому надо подождать
-        Assertions.assertEquals("rgba(20, 137, 44, 1)",$x("//span[@id='status-val']/span").shouldBe().getCssValue("background-color"));
+        Assertions.assertEquals("rgba(20, 137, 44, 1)", $x("//span[@id='status-val']/span").shouldBe().getCssValue("background-color"));
     }
 
 }

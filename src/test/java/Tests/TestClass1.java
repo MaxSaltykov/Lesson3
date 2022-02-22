@@ -1,15 +1,15 @@
 package Tests;
 
 import PageObject.AuthorisationPage;
+import PageObject.BasePage;
 import PageObject.MainPage;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.page;
 
-public class TestClass1 {
+public class TestClass1 extends BasePage {
 
     @Test
     public void Test1() {
