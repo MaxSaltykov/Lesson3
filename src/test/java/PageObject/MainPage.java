@@ -1,19 +1,11 @@
 package PageObject;
 
-import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
+import Settings.BaseSettings;
 
 import static com.codeborne.selenide.Selenide.page;
 
-public class MainPage extends BasePage {
+public class MainPage extends BaseSettings {
 
-    @FindBy(how = How.XPATH, using = "//h1[text()='System Dashboard']")
-    private SelenideElement header;
-
-    public AuthorisationPage isOpened() {
-        header.exists();
-        return page(AuthorisationPage.class);
-    }
+    public static String headerMain = "//h1[text()='System Dashboard']";
 
 }
